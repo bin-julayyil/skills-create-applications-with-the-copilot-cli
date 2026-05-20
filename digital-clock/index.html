@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock - Multiple Time Zones</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌍 Global Digital Clock</h1>
+            <p>View the current time across different time zones</p>
+        </header>
+
+        <div class="control-section">
+            <div class="input-group">
+                <input 
+                    type="text" 
+                    id="timezoneInput" 
+                    placeholder="Enter timezone (e.g., Europe/Paris, Asia/Tokyo)"
+                    class="timezone-input"
+                >
+                <button id="addButton" class="btn-add">+ Add Timezone</button>
+            </div>
+            <div class="info-text">
+                <p>💡 Use IANA timezone identifiers like: America/New_York, Europe/London, Asia/Dubai</p>
+            </div>
+        </div>
+
+        <div id="clocksContainer" class="clocks-grid">
+            <!-- Clock cards will be dynamically inserted here -->
+        </div>
+
+        <div id="errorMessage" class="error-message"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
