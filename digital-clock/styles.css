@@ -1,0 +1,424 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --success-color: #2ecc71;
+    --danger-color: #e74c3c;
+    --text-color: #2c3e50;
+    --light-bg: #f8f9fa;
+    --border-radius: 12px;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+header {
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+    animation: slideDown 0.6s ease-out;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+header p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    font-weight: 300;
+}
+
+/* Control Section */
+.control-section {
+    background: white;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+    animation: slideUp 0.6s ease-out 0.1s both;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.timezone-input {
+    flex: 1;
+    min-width: 250px;
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.timezone-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.btn-add {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+    white-space: nowrap;
+}
+
+.btn-add:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-add:active {
+    transform: translateY(0);
+}
+
+.info-text {
+    background: #f0f4ff;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.info-text p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Error Message */
+.error-message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--danger-color);
+    color: white;
+    padding: 15px 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+    opacity: 0;
+    transform: translateY(100px);
+    transition: var(--transition);
+    z-index: 1000;
+    max-width: 300px;
+}
+
+.error-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Clocks Grid */
+.clocks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    animation: fadeIn 0.5s ease-out 0.2s both;
+}
+
+@media (max-width: 768px) {
+    .clocks-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+/* Clock Card */
+.clock-card {
+    background: white;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    position: relative;
+    transition: var(--transition);
+    overflow: hidden;
+    animation: scaleIn 0.4s ease-out;
+}
+
+.clock-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+.clock-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background: var(--danger-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+}
+
+.clock-card:hover .close-btn {
+    opacity: 1;
+}
+
+.close-btn:hover {
+    background: darken(#e74c3c, 10%);
+    transform: scale(1.1);
+}
+
+.timezone-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    text-transform: capitalize;
+}
+
+.time-display {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-color);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.date-display {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.utc-offset {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+/* Removing Animation */
+.clock-card.removing {
+    animation: slideOut 0.3s ease-in forwards;
+}
+
+/* Animations */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0) rotateZ(0deg);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%) rotateZ(10deg);
+    }
+}
+
+/* Empty State */
+.clocks-grid:empty::after {
+    content: 'Add a timezone to get started!';
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 20px;
+    color: white;
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    header p {
+        font-size: 1rem;
+    }
+
+    .control-section {
+        padding: 20px;
+    }
+
+    .input-group {
+        flex-direction: column;
+    }
+
+    .timezone-input {
+        min-width: auto;
+    }
+
+    .btn-add {
+        width: 100%;
+    }
+
+    .time-display {
+        font-size: 2rem;
+    }
+
+    .clock-card {
+        padding: 20px;
+    }
+
+    .error-message {
+        left: 10px;
+        right: 10px;
+        max-width: none;
+    }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    .control-section,
+    .close-btn,
+    .error-message {
+        display: none;
+    }
+
+    .clock-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+
+    .control-section {
+        background: #2d2d2d;
+        color: #f0f0f0;
+    }
+
+    .timezone-input {
+        background: #3a3a3a;
+        color: #f0f0f0;
+        border-color: #555;
+    }
+
+    .timezone-input:focus {
+        border-color: var(--primary-color);
+    }
+
+    .clock-card {
+        background: #2d2d2d;
+        color: #f0f0f0;
+    }
+
+    .time-display {
+        color: #f0f0f0;
+    }
+
+    .date-display {
+        color: #bbb;
+    }
+
+    .info-text {
+        background: #3a3a3a;
+        color: #bbb;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
