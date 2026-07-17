@@ -22,7 +22,7 @@
     "workbench.panel.chat.view.enabled": false,
     "terminal.integrated.defaultLocation": "editor",
     "terminal.integrated.defaultProfile.linux": "bash",
-    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreview": true,
     "workbench.editor.closeOnFileDelete": true,
     "workbench.layoutControl.enabled": false,
     "workbench.layoutControl.type": "hidden",
